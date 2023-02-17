@@ -1,6 +1,10 @@
 package conta_b;
 
+import java.awt.Color;
 import java.util.Scanner;
+
+import conta_b.model.Conta;
+import conta_b.util.Cores;
 
 public class MenuContaBancaria {
 	
@@ -8,15 +12,50 @@ public class MenuContaBancaria {
 		
 		Scanner leia = new Scanner (System.in);
 		
+		/* Criamos o objeto conta c1*/
+		Conta c1 = new Conta(1, 123, 1, "Kelvin Wesley", 30000.0f);
+		
+		//Visualizamos os dados da conta c1
+		c1.visualizar();
+		
+		// Atualizamos o saldo da conta c1
+		c1.setSaldo(35000.0f);
+		
+		// Visualizanos apenas o saldo da conta c1
+		System.out.println("\n\n" + c1.getSaldo());
+		
+		
+		
+		
+		// Criamos o objeto conta c2
+		Conta c2 = new Conta(2, 123, 1, "Dener Cardoso", 50000.0f);
+		
+		//Visualizamos os dados da conta c2
+		c2.visualizar();
+		
+		//Efetuamos um saque na conta c2 e visualzamos o novo saldo
+		if (c2.sacar(1000.0f));
+			System.out.println("\n\n" + c2.getSaldo());
+		
+		
+		
+			
+		//Efetuamos um deposito na conta c1
+		c1.depositar(10000.0f);
+		
+		//visualizamos os dados da conta c1 após o depósito
+		c1.visualizar();
+		
+		
 		int opcao;
 		
 		while (true) {
-			System.out.println("##################################################");
+			System.out.println(Cores.TEXT_YELLOW_BRIGHT + Cores.ANSI_BLACK_BACKGROUND +"##################################################");
 			System.out.println("                                                  ");
 			System.out.println("                Kelcred Bank                      ");
 			System.out.println("                                                  ");
 			System.out.println("##################################################");
-			System.out.println("                                                  ");
+			System.out.println(Cores.TEXT_WHITE + Cores.ANSI_BLACK_BACKGROUND + "                                                  ");
 			System.out.println("           1 - Criar Conta                        ");
 			System.out.println("           2 - Listar todas as Contas             ");
 			System.out.println("           3 - Buscar Conta por Numero            ");
@@ -29,11 +68,11 @@ public class MenuContaBancaria {
 			System.out.println("                                                  "); 
 			System.out.println("##################################################"); 
 			System.out.println("Entre com a opção desejada:                       "); 
-			System.out.println("                                                  "); 
+			System.out.println("                                                  " + Cores.TEXT_RESET); 
 			opcao = leia.nextInt();
 			
 			if (opcao == 9) {
-					System.out.println("\nKelcred Bank - Quarda dinheiro, jovem!");
+					System.out.println("\nKelcred Bank - Guarda dinheiro, jovem!");
 					leia.close();
 					System.exit(0);
 			}
