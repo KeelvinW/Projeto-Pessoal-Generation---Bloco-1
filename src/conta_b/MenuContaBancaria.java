@@ -1,6 +1,7 @@
 package conta_b;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Scanner;
 
 import conta_b.model.Conta;
@@ -14,7 +15,7 @@ public class MenuContaBancaria {
 		
 		Scanner leia = new Scanner (System.in);
 		
-		/* Criamos o objeto conta c1
+		//Criamos o objeto conta c1
 		Conta c1 = new Conta(1, 123, 1, "Kelvin Wesley", 30000.0f);
 		
 		//Visualizamos os dados da conta c1
@@ -29,7 +30,7 @@ public class MenuContaBancaria {
 		
 		
 		
-		// Criamos o objeto conta c2
+		/* Criamos o objeto conta c2
 		Conta c2 = new Conta(2, 123, 1, "Dener Cardoso", 50000.0f);
 		
 		//Visualizamos os dados da conta c2
@@ -62,7 +63,11 @@ public class MenuContaBancaria {
 		c4.depositar(5000.0f);
 		c4.visualizar();
 		
-		int opcao;
+		
+		
+		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
+		float saldo, limite, valor;
+		String titular;
 		
 		while (true) {
 			System.out.println(Cores.TEXT_YELLOW_BRIGHT + Cores.ANSI_BLACK_BACKGROUND +"##################################################");
@@ -70,7 +75,7 @@ public class MenuContaBancaria {
 			System.out.println("                Kelcred Bank                      ");
 			System.out.println("                                                  ");
 			System.out.println("##################################################");
-			System.out.println(Cores.TEXT_WHITE + Cores.ANSI_BLACK_BACKGROUND + "                                                  ");
+			System.out.println("                                                  ");
 			System.out.println("           1 - Criar Conta                        ");
 			System.out.println("           2 - Listar todas as Contas             ");
 			System.out.println("           3 - Buscar Conta por Numero            ");
@@ -83,7 +88,7 @@ public class MenuContaBancaria {
 			System.out.println("                                                  "); 
 			System.out.println("##################################################"); 
 			System.out.println("Entre com a opção desejada:                       "); 
-			System.out.println("                                                  " + Cores.TEXT_RESET); 
+			System.out.println("                                                  "); 
 			opcao = leia.nextInt();
 			
 			if (opcao == 9) {
@@ -92,21 +97,145 @@ public class MenuContaBancaria {
 					System.exit(0);
 			}
 			switch (opcao) {
-			case 1 -> System.out.println("Criar Conta\n\n");
-			case 2 -> System.out.println("Listar todas as Contas\n\n");
-			case 3 -> System.out.println("Consultar dados da Conta - por número\n\n");
-			case 4 -> System.out.println("Atualizar dados da Conta\n\n");
-			case 5 -> System.out.println("Apagar a Conta\n\n");
-			case 6 -> System.out.println("Saque\n\n");
-			case 7 -> System.out.println("Depositar\n\n");
-			case 8 -> System.out.println("Transferir valores entre Contas\n\n");
-			default -> System.out.println("\nOpção Inválida!\n");
-			
-			
+			case 1 -> { 
+						System.out.println("Criar Conta\n\n" );
+						
+						System.out.println("Número da Agencia: ");
+						agencia = leia.nextInt();
+						
+						System.out.println("Nome do Titular: ");
+						leia.skip("\\R?");
+						titular = leia.nextLine();
+						
+						do {
+							System.out.println("Tipo da Conta (1-CC / 2-CP): ");
+							tipo = leia.nextInt();
+						}while(tipo < 1 && tipo > 2);
+								
+						System.out.println("Saldo da Conta: ");
+						saldo = leia.nextFloat();
+						
+						switch(tipo) {
+							case 1 -> {
+								System.out.println("Limite da Conta Corrente: ");
+								limite = leia.nextFloat();
+								ContaCorrente cc = new ContaCorrente(0, agencia, tipo, titular, saldo, limite);
+								cc.visualizar();
+							}
+							case 2 -> {	
+								System.out.println("Aniversário da Conta Poupança: ");
+								aniversario = leia.nextInt();
+								ContaCorrente cp = new ContaCorrente(0, agencia, tipo, titular, saldo, aniversario);
+								cp.visualizar();
+							}
+						}
+			keyPress();
 			}
+			case 2 -> { System.out.println("Listar todas as Contas\n\n");
+			
+			keyPress();
+			}
+			case 3 -> { System.out.println("Consultar dados da Conta - por número\n\n");
+						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+			keyPress();			
+			}
+			case 4 -> { System.out.println("Atualizar dados da Conta\n\n");
+						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Número da Agencia: ");
+						agencia = leia.nextInt();
+						
+						System.out.println("Nome do Titular: ");
+						leia.skip("\\R?");
+						titular =  leia.nextLine();
+						
+						// Busca do tipo
+						tipo = 0;
+						
+						System.out.println("Saldo da Conta: ");
+						saldo = leia.nextFloat();
+						
+						switch(tipo) {
+							case 1 ->{
+								System.out.println("Limite da Conta Corrente: ");
+								limite = leia.nextFloat();
+								ContaCorrente cc = new ContaCorrente(0, agencia, tipo, titular, saldo, limite);
+								cc.visualizar();
+							}
+							case 2 ->{
+								System.out.println("Aniversário da Conta Poupança: ");
+								aniversario = leia.nextInt();
+								ContaPoupanca cp = new ContaPoupanca(0, agencia, tipo, titular, saldo, aniversario);
+								cp.visualizar();
+							}
+						}
+			keyPress();
+			}
+			case 5 -> { System.out.println("Apagar a Conta\n\n");
+						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+			keyPress();
+			}
+			case 6 -> { System.out.println("Saque\n\n");
+						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Valor do Saque: ");
+						valor = leia.nextFloat();
+			keyPress();
+			}
+			case 7 -> { System.out.println("Depositar\n\n");
+						
+						System.out.println("Número da Conta: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Valor do Depósito: ");
+						valor = leia.nextFloat();
+			keyPress();
+			}
+			case 8 -> { System.out.println("Transferir valores entre Contas\n\n");
+			
+						System.out.println("Número da Conta - Origem: ");
+						numero = leia.nextInt();
+						
+						System.out.println("Número da Conta - Destino: ");
+						numeroDestino = leia.nextInt();
+						
+						System.out.println("Valor da Transferência: ");
+						valor = leia.nextFloat();
+			keyPress();
+			}
+			default -> { System.out.println("\nOpção Inválida!\n");
+						
+						System.out.println("\nOpção Inválida!\n");
+						
+			}
+			
+			
+		  }
 			
 		}
 		
+	}
+
+	public static void keyPress() {
+
+		try {
+
+			System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
+			System.in.read();
+
+		} catch (IOException e) {
+
+			System.out.println("Você pressionou uma tecla diferente de enter!");
+
+		}
 	}
 
 }
