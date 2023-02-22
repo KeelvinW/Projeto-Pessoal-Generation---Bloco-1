@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Scanner;
 
 import conta_b.model.Conta;
+import conta_b.model.ContaCorrente;
 import conta_b.util.Cores;
 
 public class MenuContaBancaria {
@@ -12,7 +13,7 @@ public class MenuContaBancaria {
 		
 		Scanner leia = new Scanner (System.in);
 		
-		/* Criamos o objeto conta c1*/
+		/* Criamos o objeto conta c1
 		Conta c1 = new Conta(1, 123, 1, "Kelvin Wesley", 30000.0f);
 		
 		//Visualizamos os dados da conta c1
@@ -44,8 +45,15 @@ public class MenuContaBancaria {
 		c1.depositar(10000.0f);
 		
 		//visualizamos os dados da conta c1 após o depósito
-		c1.visualizar();
+		c1.visualizar();*/
 		
+		ContaCorrente c3 = new ContaCorrente(3, 123, 1, "Vitoria", 30000.0f, 1000.0f);
+		
+		c3.visualizar();
+		
+		c3.sacar(32000);
+		
+		c3.visualizar();
 		
 		int opcao;
 		
