@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import conta_b.model.Conta;
 import conta_b.model.ContaCorrente;
+import conta_b.model.ContaPoupanca;
 import conta_b.util.Cores;
 
 public class MenuContaBancaria {
@@ -47,13 +48,19 @@ public class MenuContaBancaria {
 		//visualizamos os dados da conta c1 após o depósito
 		c1.visualizar();*/
 		
+		//Teste conta corrente
 		ContaCorrente c3 = new ContaCorrente(3, 123, 1, "Vitoria", 30000.0f, 1000.0f);
-		
 		c3.visualizar();
-		
 		c3.sacar(32000);
-		
 		c3.visualizar();
+		
+		//Teste conta poupança
+		ContaPoupanca c4 = new ContaPoupanca(4, 123, 2, "Jose", 90000.0f, 15);
+		c4.visualizar();
+		c4.sacar(1000.0f);
+		c4.visualizar();
+		c4.depositar(5000.0f);
+		c4.visualizar();
 		
 		int opcao;
 		
