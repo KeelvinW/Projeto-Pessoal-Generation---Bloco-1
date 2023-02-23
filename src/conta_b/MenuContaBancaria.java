@@ -15,7 +15,7 @@ public class MenuContaBancaria {
 		
 		Scanner leia = new Scanner (System.in);
 		
-		//Criamos o objeto conta c1
+		/*Criamos o objeto conta c1
 		Conta c1 = new Conta(1, 123, 1, "Kelvin Wesley", 30000.0f);
 		
 		//Visualizamos os dados da conta c1
