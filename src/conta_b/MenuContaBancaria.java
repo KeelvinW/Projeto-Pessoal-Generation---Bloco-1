@@ -231,6 +231,8 @@ public class MenuContaBancaria {
 						
 						System.out.println("Valor do Saque: ");
 						valor = leia.nextFloat();
+						
+						contas.sacar(numero, valor);
 						keyPress();
 			}
 			case 7 -> { System.out.println("Depositar\n\n");
@@ -240,6 +242,9 @@ public class MenuContaBancaria {
 						
 						System.out.println("Valor do Depósito: ");
 						valor = leia.nextFloat();
+						
+						contas.depositar(numero, valor);
+						
 						keyPress();
 			}
 			case 8 -> { System.out.println("Transferir valores entre Contas\n\n");
@@ -252,7 +257,10 @@ public class MenuContaBancaria {
 						
 						System.out.println("Valor da Transferência: ");
 						valor = leia.nextFloat();
-			keyPress();
+						
+						contas.transferir(numero, numeroDestino, valor);
+						
+						keyPress();
 			}
 			default -> { System.out.println("\nOpção Inválida!\n");
 						
